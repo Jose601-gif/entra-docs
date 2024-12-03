@@ -1,4 +1,17 @@
----
+-Import-Module Microsoft.Graph
+
+# Authenticate to Microsoft Graph (you may need to provide your credentials) 
+ Connect-MgGraph -Scopes "Device.Read.All"
+
+# Get all devices  
+ $devices = Get-MgDevice -All |select displayName,deviceId,operatingSystem,operatingSystemVersion,isManaged,isCompliant,mdmAppId,registeredOwners,TrustType
+
+# Specify the output CSV file path 
+ $outputCsvPath = "C:\\Users\\YourUserName\\Documents\\Devices.csv"
+
+$devices| Export-Csv -Path $outputCsvPath -NoTypeInformation
+
+Write-Host "Devices exported to $outputCsvPath"-
 title: Bulk create users in the Azure portal
 description: Add users in bulk in Microsoft Entra ID
 
